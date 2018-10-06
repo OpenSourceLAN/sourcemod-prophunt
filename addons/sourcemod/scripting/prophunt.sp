@@ -64,7 +64,7 @@
 
 #define MAXLANGUAGECODE 4
 
-#define PL_VERSION "3.4.0.0 beta 3"
+#define PL_VERSION "3.4.0.0 beta OpenSourceLAN edition"
 
 // sv_tags has a 255 limit
 #define SV_TAGS_SIZE 255 
@@ -480,10 +480,10 @@ new TFClassType:g_PreferredHunterClass[MAXPLAYERS+1] = { TFClass_Unknown, ... };
 public Plugin:myinfo =
 {
 	name = "PropHunt Redux",
-	author = "Darkimmortal, Geit, and Powerlord",
+	author = "Darkimmortal, Geit, and Powerlord (and like one line by SirSquidness from OpenSourceLAN)",
 	description = "Hide as a prop from the evil Pyro menace... or hunt down the hidden prop scum",
 	version = PL_VERSION,
-	url = "https://forums.alliedmods.net/showthread.php?t=228086"
+	url = "https://github.com/opensourcelan/prophunt-redux"
 }
 
 // Updated in Prophunt Redux from Source SDK 2013's const.h
@@ -4416,6 +4416,8 @@ public DoEquipProp(any:UserId)
 		{
 			SetEntityMoveType(client, MOVETYPE_WALK);
 		}
+
+		TF2_RemoveAllWeapons(client);
 	}
 }
 
@@ -4446,7 +4448,7 @@ public Action:Timer_AntiHack(Handle:timer, any:entity)
 					QueryClientConVar(client, "r_staticpropinfo", QueryStaticProp);
 				}
 				
-				if(!g_LastProp && GetConVarBool(g_PHAntiHack) && GetClientTeam(client) == TEAM_PROP && TF2_GetPlayerClass(client) == g_defaultClass[red])
+				if(!g_LastProp && GetConVarBool(g_PHAntiHack) && GetClientTeam(client) == TEAM_PROP) //&& TF2_GetPlayerClass(client) == g_defaultClass[red]
 				{
 					if(GetPlayerWeaponSlot(client, 1) != -1 || GetPlayerWeaponSlot(client, 0) != -1 || GetPlayerWeaponSlot(client, 2) != -1)
 					{
